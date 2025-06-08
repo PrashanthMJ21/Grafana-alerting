@@ -1,25 +1,39 @@
-# 📊 Grafana Alerting with Multiple Instances
+# 🚨 Grafana Alerting with Prometheus
 
-This project sets up a monitoring stack using **Prometheus**, **Grafana**, **Node Exporter**, and **Alertmanager** via **Docker Compose**. It is tailored to monitor multiple server instances with custom alerting rules and visualization panels.
+This repository contains the source code and configuration files for setting up a robust alerting and monitoring stack using **Grafana**, **Prometheus**, **Alertmanager**, and **Node Exporter**. It supports multiple server instances and visualizations for CPU, Memory, and Disk metrics, along with alerting rules configured via Grafana's unified alerting system.
 
-## 📁 Source Code
+---
 
-All the source code for this monitoring stack is available in this repository. It includes:
+## 📘 Report
 
-- Docker Compose setup
-- Prometheus scrape configurations
-- Alerting rules
-- Grafana dashboards and provisioning configs
+A detailed project report covering the architecture, setup, configurations, alerting logic, and visualization strategies is available here:
 
-## 📝 Project Report
+📄 [Grafana Alerting Report](https://docs.google.com/document/d/1MtipcynhJ_7bQdCnv558q0_oD8T1ga0BTpK8tKettcs/edit?usp=sharing)
 
-A detailed technical report outlining the architecture, setup, configurations, and alerting behavior can be accessed below:
+---
 
-👉 [View the Full Report]([https://docs.google.com/document/d/1ABCDEF123456XYZ/view](https://docs.google.com/document/d/1MtipcynhJ_7bQdCnv558q0_oD8T1ga0BTpK8tKettcs/edit?usp=sharing))  
+## 💡 Features
 
-## 🚀 Setup Instructions
+- 🔧 Multi-instance scraping via Prometheus
+- 📊 CPU, Memory, and Disk usage visualized in Grafana
+- 🚨 Custom alert rules per server (via job labels)
+- 🔁 Persistent alert rules and dashboards
+- 🔐 Optional reverse proxy setup with basic authentication (Caddy)
+- 📎 GitHub/GitLab/Google OAuth authentication options for Grafana
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/PrashanthMJ21/Grafana-alerting.git
-   cd Grafana-alerting
+---
+
+## 📂 Source Code
+
+All source code (Docker Compose, Prometheus scrape configs, Grafana provisioning, alert rules) is included in this repository.
+
+📁 This repository hosts the complete infrastructure code required to deploy the stack.
+
+---
+
+## ▶️ Getting Started
+
+```bash
+git clone https://github.com/PrashanthMJ21/Grafana-alerting.git
+cd Grafana-alerting
+docker-compose up -d
