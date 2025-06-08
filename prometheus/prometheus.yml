@@ -4,41 +4,30 @@ global:
 alerting:
   alertmanagers:
     - static_configs:
-        - targets: ['alertmanager:9093']
+        - targets: ['alertmanager:9093']  #Optional. 
 
         
 scrape_configs:
   - job_name: 'prometheus'
     static_configs:
-      - targets: ['scrape.leucinetech.com']
+      - targets: ['your-prometheus-UI-Server-IP-with-node expo-port number']
     
 
-  - job_name: 'Grafana-Server'
+  - job_name: 'Job-1'
     static_configs:
-      - targets: ['65.0.99.97:9100']
-        labels:
-          server_ip: '65.0.99.97'
-          server_name: 'grafana-server'
+      - targets: ['10.0.00.00:9100'] # Provide your server ip with port number of node expo.
 
-  - job_name: 'prometheus-server'
+  - job_name: 'Job-2'
     static_configs:
-      - targets: ['3.110.221.215:9100']
-        labels:
-          server_ip: '3.110.221.215'
-          server_name: 'prometheus-server'
+      - targets: ['10.0.00.00:9100']
      
-  - job_name: 'platform-qa-server'
+  - job_name: 'Job-3'
     static_configs:
-      - targets: ['node.leucinetech.com']
-        labels:
-          server_ip: '34.93.160.186'
-          server_name: 'platform-qa-server'          
+      - targets: ['10.0.00.00:9100']         
 
-  - job_name: 'cleen-biocon-server'
+  - job_name: 'Job-4'
     static_configs:
-      - targets: ['biocon-server:9100']
-        labels:
-          server_ip: '20.244.95.3'
-          server_name: 'cleen-biocon-server'          
+      - targets: ['10.0.00.00:9100']
+        
 # rule_files:
 #   - "alert.rules.yml"
