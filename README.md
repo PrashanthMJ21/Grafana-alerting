@@ -8,7 +8,7 @@ This repository contains the source code and configuration files for setting up 
 
 A detailed project report covering the architecture, setup, configurations, alerting logic, and visualization strategies is available here:
 
-📄 [Grafana Alerting Report](https://docs.google.com/document/d/1MtipcynhJ_7bQdCnv558q0_oD8T1ga0BTpK8tKettcs/edit?usp=sharing)
+📄 [Grafana Alerting Report](https://docs.google.com/document/d/1MtipcynhJ_7bQdCnv558q0_oD8T1ga0BTpK8tKettcs/view)
 
 ---
 
