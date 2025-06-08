@@ -1,0 +1,22 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 1m
+  repeat_interval: 1h
+  receiver: 'default'
+
+receivers:
+  - name: 'default'
+    slack_configs:
+      - api_url: 'https://hooks.slack.com/services/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'
+        channel: '#devops-alerts'
+        text: '{{ template "slack.alert" . }}'
+        send_resolved: true
+
+templates:
+  - '/etc/alertmanager/template.tmpl'
+
+

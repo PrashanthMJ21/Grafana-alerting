@@ -1,0 +1,12 @@
+{{ define "slack.alert" }}
+{{ if eq .Status "firing" }}
+:rotating_light: {{ .CommonAnnotations.title }} Alert
+-> Summary: {{ .CommonAnnotations.summary }}  
+:desktop_computer: Server IP: {{ .CommonLabels.instance }}  
+:globe_with_meridians: URL: uat.cleen.leucinetech.com  
+{{ else }}
+:white_check_mark: {{ .CommonAnnotations.title }} Resolved
+-> {{ .CommonAnnotations.summary_resolved }}  
+:globe_with_meridians: URL: uat.cleen.leucinetech.com  
+{{ end }}
+{{ end }}

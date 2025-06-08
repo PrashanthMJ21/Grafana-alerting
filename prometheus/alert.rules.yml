@@ -1,0 +1,35 @@
+groups:
+  - name: system-alerts
+    rules:
+      - alert: HighCPUUsage
+        expr: 100 - (avg by (instance, server_ip, server_name) (rate(node_cpu_seconds_total{mode="idle"}[15s])) * 100) > 30
+        for: 1m
+        labels:
+          severity: High-Priority
+          instance: '{{ $labels.server_ip }}'
+        annotations:
+          title: Grafana CPU-usage
+          summary: CPU usage is above threshold value of 30%
+          summary_resolved: CPU usage is back to normal.
+
+      - alert: HighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 40
+        for: 1m
+        labels:
+          severity: High-Priority
+          instance: '{{ $labels.server_ip }}'
+        annotations:
+          title: Grafana Memory-usage
+          summary: Memory usage is above threshold value of 30%
+          summary_resolved: Memory usage is back to normal.
+
+      - alert: HighDiskUsage
+        expr: avg by(server_ip, server_name) ((node_filesystem_size_bytes{fstype!~"tmpfs|overlay"} - node_filesystem_free_bytes{fstype!~"tmpfs|overlay"}) / node_filesystem_size_bytes{fstype!~"tmpfs|overlay"}) * 100 > 30
+        for: 1m
+        labels:
+          severity: High-Priority
+          instance: '{{ $labels.server_ip }}'
+        annotations:
+          title: Grafana Disk-usage
+          summary: Disk usage is above threshold value of 30%
+          summary_resolved: Disk usage is back to normal.

@@ -1,0 +1,86 @@
+version: '3.8'
+
+networks:
+  monitor-net:
+
+services:
+  prometheus-init:
+    image: alpine
+    container_name: prometheus-init
+    command: ["sh", "-c", "chown -R 65534:65534 /prometheus"]
+    volumes:
+      - /home/ubuntu/data-backup/prometheus:/prometheus
+    entrypoint: ""
+    restart: "no"
+    networks:
+      - monitor-net
+
+  grafana-init:
+    image: alpine
+    container_name: grafana-init
+    command: ["sh", "-c", "chown -R 472:472 /var/lib/grafana"]
+    volumes:
+      - /home/ubuntu/data-backup/grafana:/var/lib/grafana
+    entrypoint: ""
+    restart: "no"
+    networks:
+      - monitor-net
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    depends_on:
+      - prometheus-init
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/alert.rules.yml:/etc/prometheus/alert.rules.yml
+      - /home/ubuntu/data-backup/prometheus:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    ports:
+      - "9090:9090"
+    networks:
+      - monitor-net
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    depends_on:
+      - grafana-init
+    volumes:
+      - /home/ubuntu/data-backup/grafana:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - monitor-net
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    volumes:
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - ./alertmanager/template.tmpl:/etc/alertmanager/template.tmpl
+      - /home/ubuntu/data-backup/alertmanager:/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+    ports:
+      - "9093:9093"
+    networks:
+      - monitor-net
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    ports:
+      - "9100:9100"
+    networks:
+      - monitor-net
+
+
+
+
+
+
+
+

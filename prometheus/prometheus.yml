@@ -1,0 +1,44 @@
+global:
+  scrape_interval: 5s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ['alertmanager:9093']
+
+        
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['scrape.leucinetech.com']
+    
+
+  - job_name: 'Grafana-Server'
+    static_configs:
+      - targets: ['65.0.99.97:9100']
+        labels:
+          server_ip: '65.0.99.97'
+          server_name: 'grafana-server'
+
+  - job_name: 'prometheus-server'
+    static_configs:
+      - targets: ['3.110.221.215:9100']
+        labels:
+          server_ip: '3.110.221.215'
+          server_name: 'prometheus-server'
+     
+  - job_name: 'platform-qa-server'
+    static_configs:
+      - targets: ['node.leucinetech.com']
+        labels:
+          server_ip: '34.93.160.186'
+          server_name: 'platform-qa-server'          
+
+  - job_name: 'cleen-biocon-server'
+    static_configs:
+      - targets: ['biocon-server:9100']
+        labels:
+          server_ip: '20.244.95.3'
+          server_name: 'cleen-biocon-server'          
+# rule_files:
+#   - "alert.rules.yml"
